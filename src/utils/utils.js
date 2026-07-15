@@ -105,7 +105,7 @@ const isHttpUrl = value => {
   return /^https?:\/\//i.test(String(value || ''));
 };
 
-const fileMatchRegex = /file:(\/*)([A-Za-z]:[\\/].*?|\/.*?)\.(png|avi|webm|jpg|html|txt)/gi;
+const fileMatchRegex = /file:(\/*)([A-Za-z]:[\\/].*?|\/.*?)\.(png|avi|webm|jpg|html|txt|mp4)/gi;
 
 const fetchFilesFromStackTrace = (stack = '', checkExists = true) => {
   let files = Array.from(stack.matchAll(fileMatchRegex))
