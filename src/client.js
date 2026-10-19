@@ -234,7 +234,7 @@ class Client {
     const stackArtifactsEnabled = transformEnvVarToBoolean(process.env.TESTOMATIO_STACK_ARTIFACTS);
 
     const {
-      time = 0,
+      time,
       example = null,
       filesBuffers = [],
       code = null,
@@ -346,7 +346,9 @@ class Client {
       suite_id,
       test_id,
       message,
-      run_time: typeof time === 'number' ? time : parseFloat(time),
+      // A follow-up call that only uploads artifacts (e.g. Playwright's onEnd) carries no time:
+      // leave run_time unset so it doesn't overwrite the duration reported with the result.
+      run_time: time === undefined || time === null ? undefined : typeof time === 'number' ? time : parseFloat(time),
       timestamp,
       artifacts,
       meta,
